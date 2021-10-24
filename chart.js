@@ -1,8 +1,8 @@
 var chart = LightweightCharts.createChart(document.getElementById("chart"), {
-	width: 600,
-    height: 300,
+	width: 1000,
+    height: 600,
 	layout: {
-		backgroundColor: '#000000',
+		backgroundColor: '#0000',
 		textColor: 'rgba(255, 255, 255, 0.9)',
 	},
 	grid: {
@@ -25,12 +25,12 @@ var chart = LightweightCharts.createChart(document.getElementById("chart"), {
 });
 
 var candleSeries = chart.addCandlestickSeries({
-  upColor: 'rgba(255, 144, 0, 1)',
-  downColor: '#000',
-  borderDownColor: 'rgba(255, 144, 0, 1)',
-  borderUpColor: 'rgba(255, 144, 0, 1)',
-  wickDownColor: 'rgba(255, 144, 0, 1)',
-  wickUpColor: 'rgba(255, 144, 0, 1)',
+  upColor: 'rgb(38,166,154)',
+  downColor: 'rgb(239,83,80)',
+  borderDownColor: 'rgb(239,83,80) ',
+  borderUpColor: 'rgb(38,166,154)',
+  wickDownColor: 'rgb(239,83,80)',
+  wickUpColor: 'rgb(38,166,154)',
 });
 
 candleSeries.setData([
