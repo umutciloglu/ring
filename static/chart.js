@@ -25,12 +25,12 @@ var chart = LightweightCharts.createChart(document.getElementById("chart"), {
 });
 
 var candleSeries = chart.addCandlestickSeries({
-  upColor: 'rgb(38,166,154)',
-  downColor: 'rgb(239,83,80)',
-  borderDownColor: 'rgb(239,83,80) ',
-  borderUpColor: 'rgb(38,166,154)',
-  wickDownColor: 'rgb(239,83,80)',
-  wickUpColor: 'rgb(38,166,154)',
+  upColor: 'rgb(56, 142, 60)',
+  downColor: 'rgb(239, 83, 80)',
+  borderDownColor: 'rgb(0, 0, 0) ',
+  borderUpColor: 'rgb(0, 0, 0)',
+  wickDownColor: 'rgb(0, 0, 0)',
+  wickUpColor: 'rgb(0, 0, 0)',
 });
 
 candleSeries.setData([

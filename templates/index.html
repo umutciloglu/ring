@@ -11,8 +11,18 @@
         <div id="ui">
             <div id="chart"></div>
         </div>
+        <div id="balance">
+            <h2>My Balances</h2>
+            <ul>
+                {% for balance in balances%}
+                <li>
+                    {{balance['asset']}} {{balance['free']}}
+                </li>
+                {%endfor%}
+            </ul>
+        </div>
         
     </body>
-    <script src="{{ url_for('static', filename='script-test.js')}}"></script>
+    <!-- <script src="{{ url_for('static', filename='script-test.js')}}"></script> -->
     <script src="{{ url_for('static', filename='chart.js')}}"></script>
-    </html>
+</html>
