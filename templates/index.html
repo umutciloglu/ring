@@ -15,6 +15,16 @@
         
         <div id="symbol-selection">
             <form action="/buy" method="post">
+                <div>
+                    {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                            {{ message }}
+                        {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+                </div>
+
                 <input type="text" name="quantity" id="quantity" placeholder="quantity">
                 <input type="text" name="price" id="price" placeholder="price">
                 <select name="symbols" id="symbol">

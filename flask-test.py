@@ -1,12 +1,13 @@
 from crypt import methods
 from pydoc import cli
-from flask import Flask, render_template, request
+from flask import Flask, redirect, render_template, request, flash
 from binance.client import Client
 from binance.enums import *
 import config, csv
 
 #initialize flask app and binance client
 app = Flask(__name__)
+app.secret_key = b'ausdha7dtas7dasi'
 client = Client(config.API_KEY, config.API_SECRET)
 
 @app.route("/")
@@ -22,19 +23,28 @@ def index():
 
     return render_template("index.html", balances = balances, symbols = symbols)
 
-@app.route("/test")
+@app.route("/testBuy")
 def test():
-    return "route test"
+    orderResponse = client.create_test_order(
+    symbol='BTCUSDT',
+    side=SIDE_BUY,
+    type=ORDER_TYPE_LIMIT,
+    timeInForce=TIME_IN_FORCE_GTC,
+    quantity=100,
+    price='30000')
+
+    return orderResponse
 
 @app.route('/buy', methods=['POST'])
 def buyOrder():
-    print(request.form)
     orderInfo = request.form
+    try:
+        orderResponse = client.order_limit_buy(
+        symbol=orderInfo['symbols'],
+        quantity=orderInfo['quantity'],
+        price=orderInfo['price'])
+    except Exception as e:
+        flash(e.message, 'error')
 
-    orderResponse = client.order_limit_buy(
-    symbol=orderInfo['symbols'],
-    quantity=orderInfo['quantity'],
-    price=orderInfo['price'])
-
-    return orderResponse
+    return redirect('/')
     
