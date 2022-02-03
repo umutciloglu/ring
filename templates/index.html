@@ -14,11 +14,16 @@
 
         
         <div id="symbol-selection">
-            <select name="symbols" id="symbol">
-                {% for symbol in symbols %}
-                <option> {{symbol['symbol']}}</option>
-                {%endfor%}
-            </select>
+            <form action="/buy" method="post">
+                <input type="text" name="quantity" id="quantity" placeholder="quantity">
+                <input type="text" name="price" id="price" placeholder="price">
+                <select name="symbols" id="symbol">
+                    {% for symbol in symbols %}
+                    <option> {{symbol['symbol']}}</option>
+                    {%endfor%}
+                </select>
+                <input type="submit" value="buy" name="buy">
+            </form>
         </div>
 
         <div id="balance">

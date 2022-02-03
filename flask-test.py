@@ -1,4 +1,6 @@
-from flask import Flask, render_template
+from crypt import methods
+from pydoc import cli
+from flask import Flask, render_template, request
 from binance.client import Client
 from binance.enums import *
 import config, csv
@@ -24,20 +26,15 @@ def index():
 def test():
     return "route test"
 
-@app.route('/buy')
+@app.route('/buy', methods=['POST'])
 def buyOrder():
-    params = {
-        'symbol': 'USDTTRY',
-        'side': 'SELL',
-        'type': 'LIMIT',
-        'timeInForce': 'GTC',
-        'quantity': 1,
-        'price': 14
-    }
+    print(request.form)
+    orderInfo = request.form
 
-    # info = client.get_symbol_info('USDTTRY')
-    # print(info)
-    orderResponse = client.create_test_order(**params)
+    orderResponse = client.order_limit_buy(
+    symbol=orderInfo['symbols'],
+    quantity=orderInfo['quantity'],
+    price=orderInfo['price'])
 
     return orderResponse
     
