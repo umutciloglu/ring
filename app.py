@@ -16,10 +16,7 @@ def index():
 
     balances = [balance for balance in balances if 'BTC' == balance['asset'] or 'ETH' == balance['asset'] or 'USDT' == balance['asset']]
 
-    exchangeInfo = client.get_exchange_info()
-    symbols = exchangeInfo['symbols']
-    symbols = sorted(symbols, key = lambda i: i['symbol'])
-    print(type(symbols[1]))
+    symbols = ['BTCUSDT', 'ETHUSDT']
 
     return render_template("index.html", balances = balances, symbols = symbols)
 

@@ -29,7 +29,7 @@
                 <input type="text" name="price" id="price" placeholder="price">
                 <select name="symbols" id="symbol">
                     {% for symbol in symbols %}
-                    <option> {{symbol['symbol']}}</option>
+                    <option> {{symbol}}</option>
                     {%endfor%}
                 </select>
                 <input type="submit" value="buy" name="buy">
