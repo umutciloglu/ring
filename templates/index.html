@@ -11,6 +11,16 @@
         <div id="ui">
             <div id="chart"></div>
         </div>
+
+        
+        <div id="symbol-selection">
+            <select name="symbols" id="symbol">
+                {% for symbol in symbols %}
+                <option> {{symbol['symbol']}}</option>
+                {%endfor%}
+            </select>
+        </div>
+
         <div id="balance">
             <h2>My Balances</h2>
             <ul>
