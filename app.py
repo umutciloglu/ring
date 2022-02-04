@@ -1,6 +1,6 @@
 from crypt import methods
 from pydoc import cli
-from flask import Flask, redirect, render_template, request, flash
+from flask import Flask, redirect, render_template, request, flash, jsonify
 from binance.client import Client
 from binance.enums import *
 import config, csv
@@ -44,4 +44,24 @@ def buyOrder():
         flash(e.message, 'error')
 
     return redirect('/')
+
+
+@app.route('/historical-data')
+def historicalData():
+    candles = client.get_historical_klines('BTCUSDT', Client.KLINE_INTERVAL_15MINUTE, "1 week ago UTC")
+
+    processedCandles = []
+
+    for candle in candles:
+        candleStick = { 
+            "time": candle[0]/1000, 
+            "open": candle[1], 
+            "high": candle[2], 
+            "low": candle[3], 
+            "close": candle[4] 
+        }
+
+        processedCandles.append(candleStick)
+
     
+    return jsonify(processedCandles)
