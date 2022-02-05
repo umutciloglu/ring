@@ -14,7 +14,7 @@ client = Client(config.API_KEY, config.API_SECRET)
 def index():
     balances = client.get_account()['balances']
 
-    balances = [balance for balance in balances if 'BTC' == balance['asset'] or 'ETH' == balance['asset'] or 'USDT' == balance['asset']]
+    balances = [balance for balance in balances if balance['asset'] in ['BTC', 'ETH', 'USDT']]
 
     symbols = ['BTCUSDT', 'ETHUSDT']
 
@@ -32,11 +32,12 @@ def test():
 
     return orderResponse
 
+#route to buy a symbol with given amount and price from the form
 @app.route('/buy', methods=['POST'])
 def buyOrder():
     orderInfo = request.form
     try:
-        orderResponse = client.order_limit_buy(
+        client.order_limit_buy(
         symbol=orderInfo['symbols'],
         quantity=orderInfo['quantity'],
         price=orderInfo['price'])
@@ -45,7 +46,7 @@ def buyOrder():
 
     return redirect('/')
 
-
+#route that fetches and stores initial historical data
 @app.route('/historical-data')
 def historicalData():
     candles = client.get_historical_klines('BTCUSDT', Client.KLINE_INTERVAL_15MINUTE, "1 week ago UTC")

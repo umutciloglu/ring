@@ -33,14 +33,15 @@ var candleSeries = chart.addCandlestickSeries({
   wickUpColor: 'rgb(0, 0, 0)',
 });
 
+//fetch the initial historical data for the chart
 fetch('http://127.0.0.1:5000/historical-data')
 		.then(response => response.json())
 		.then((response) => {
 			candleSeries.setData(response);
 		})
 
+//listen to live price websocket of binance and with every message add it to the chart and update the chart
 var binanceSocket = new WebSocket("wss://stream.binance.com:9443/ws/btcusdt@kline_15m")
-
 binanceSocket.onmessage = function(event){
 	var message = JSON.parse(event.data)
 

@@ -15,7 +15,8 @@
         
         <div id="symbol-selection">
             <form action="/buy" method="post">
-                <div>
+                <!-- div to show any errors that might occur during the transaction -->
+                <div id="error-panel">
                     {% with messages = get_flashed_messages() %}
                     {% if messages %}
                         {% for message in messages %}
