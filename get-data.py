@@ -3,17 +3,18 @@ import config, csv, datetime
 
 client = Client(config.API_KEY, config.API_SECRET)
 
-candles = client.get_historical_klines('BTCUSDT', Client.KLINE_INTERVAL_1DAY, "1 year ago UTC")
+candles = client.get_historical_klines('BTCUSDT', Client.KLINE_INTERVAL_15MINUTE, "2 month ago UTC")
 
 # for candle in candles:
 #     timestamp = datetime.datetime.fromtimestamp(candle[0]/1000)
 #     print(timestamp.strptime())
 
-file = open('1day.csv','w',newline='')
+file = open('15-min-for-2-months.csv','w',newline='')
 
 candlestickWriter = csv.writer(file, delimiter=',')
-candlestickWriter.writerow(['time','open','high','low','close','volume','close-time','quote-asset-volume'
-                            ,'number-of-trades','taker-buy-base-asset-volume','taker-buy-quote-asset-volume','ignore'])
+# candlestickWriter.writerow(['time','open','high','low','close','volume','close-time','quote-asset-volume'
+#                             ,'number-of-trades','taker-buy-base-asset-volume','taker-buy-quote-asset-volume','ignore'])
 
 for candle in candles:
+    candle[0] = candle[0] / 1000
     candlestickWriter.writerow(candle)
