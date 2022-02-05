@@ -3,7 +3,7 @@ import config, csv, datetime
 
 client = Client(config.API_KEY, config.API_SECRET)
 
-candles = client.get_historical_klines('BTCUSDT', Client.KLINE_INTERVAL_15MINUTE, "2 month ago UTC")
+candles = client.get_historical_klines('BTCUSDT', Client.KLINE_INTERVAL_15MINUTE, "1 jan 2019","1 feb 2019")
 
 # for candle in candles:
 #     timestamp = datetime.datetime.fromtimestamp(candle[0]/1000)
