@@ -9,20 +9,26 @@ class TestStrategy(bt.Strategy):
         self.datahigh = self.datas[0].high
         self.posSize = 0.1
 
+    def log(self, txt, dt=None):
+        ''' Logging function for this strategy'''
+        dt = dt or self.datas[0].datetime.date(0)
+        print('%s, %s' % (dt.isoformat(), txt))
+
     def next(self):
         # if self.RSI < 30 and not self.position:
         #     self.buy(size=1)
         # if self.RSI > 70 and self.position:
         #     self.close()
-        if self.dataclose <= self.bbands.lines.mid[0] and not self.position.size > 0:
+        if self.dataclose <= self.bbands.lines.mid and not self.position:
             self.buy(size=self.posSize)
-            print(self.position.size)
-        if self.datahigh >= self.bbands.lines.top[0] - self.bbands.lines.top[0] * 0.05 and self.position.size > 0:
+            # print(self.position.size)
+        if self.datahigh >= self.bbands.lines.top and self.position:
+            # self.log('Top Band: %.2f Close: %.2f High: %.2f' % (self.bbands.lines.top[0] - self.bbands.lines.top[0] * 0.05, self.dataclose[0],self.datahigh[0]))
             self.close(size=self.posSize)
 
 cerebro = bt.Cerebro()
 
-data = bt.feeds.GenericCSVData(dataname='1mar2019-1apr2019-15min.csv', dtformat=2)
+data = bt.feeds.GenericCSVData(dataname='1mar2019-1apr2019-15min.csv', dtformat=2, compression=15, timeframe=bt.TimeFrame.Minutes)
 
 cerebro.adddata(data)
 # cerebro.addsizer(bt.sizers.FixedSize, stake=1)
