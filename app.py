@@ -46,6 +46,19 @@ def buyOrder():
 
     return redirect('/')
 
+@app.route('/sell',methods=['POST'])
+def sellOrder():
+    orderInfo = request.form
+    try:
+        client.order_limit_sell(
+            symbol=orderInfo['symbols'],
+            quantity=orderInfo['quantity'],
+            price=orderInfo['price'])
+    except Exception as e:
+        flash(e.message, 'Error')
+        
+    return redirect('/')
+
 #route that fetches and stores initial historical data
 @app.route('/historical-data')
 def historicalData():

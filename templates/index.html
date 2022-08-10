@@ -14,18 +14,17 @@
 
         
         <div id="symbol-selection">
+            <!-- div to show any errors that might occur during the transaction -->
+            <div id="error-panel">
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        {{ message }}
+                    {% endfor %}
+                {% endif %}
+                {% endwith %}
+            </div>
             <form action="/buy" method="post">
-                <!-- div to show any errors that might occur during the transaction -->
-                <div id="error-panel">
-                    {% with messages = get_flashed_messages() %}
-                    {% if messages %}
-                        {% for message in messages %}
-                            {{ message }}
-                        {% endfor %}
-                    {% endif %}
-                    {% endwith %}
-                </div>
-
                 <input type="text" name="quantity" id="quantity" placeholder="quantity">
                 <input type="text" name="price" id="price" placeholder="price">
                 <select name="symbols" id="symbol">
@@ -34,6 +33,16 @@
                     {%endfor%}
                 </select>
                 <input type="submit" value="buy" name="buy">
+            </form>
+            <form action="/sell" method="post">
+                <input type="text" name="quantity" id="quantity" placeholder="quantity">
+                <input type="text" name="price" id="price" placeholder="price">
+                <select name="symbols" id="symbol">
+                    {% for symbol in symbols %}
+                    <option> {{symbol}}</option>
+                    {%endfor%}
+                </select>
+                <input type="submit" value="sell" name="sell">
             </form>
         </div>
 
