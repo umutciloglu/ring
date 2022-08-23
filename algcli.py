@@ -15,7 +15,7 @@ def run(d):
         os.environ["FLASK_ENV"] = "development"
     else:
         os.environ["FLASK_ENV"] = "production"
-    subprocess.run("./CLI/algrun.sh")
+    subprocess.run(os.path.dirname(__file__) + "/CLI/algrun.sh")
     
 @cli.command()
 def backtest():

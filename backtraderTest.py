@@ -1,3 +1,4 @@
+import os
 from turtle import position
 import backtrader as bt
 
@@ -35,7 +36,7 @@ class TestStrategy(bt.Strategy):
 def run():
     cerebro = bt.Cerebro()
 
-    data = bt.feeds.GenericCSVData(dataname='1mar2019-1apr2019-15min.csv', dtformat=2, compression=15, timeframe=bt.TimeFrame.Minutes)
+    data = bt.feeds.GenericCSVData(dataname=os.path.dirname(__file__) + '/1mar2019-1apr2019-15min.csv', dtformat=2, compression=15, timeframe=bt.TimeFrame.Minutes)
 
     cerebro.adddata(data)
     # cerebro.addsizer(bt.sizers.FixedSize, stake=1)
