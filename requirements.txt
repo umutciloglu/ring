@@ -1,5 +1,5 @@
 python-binance==1.0.15
-numpy==1.21.3
+numpy==1.23.2
 Flask==2.0.2
 TA-Lib==0.4.21
 backtrader==1.9.76.123

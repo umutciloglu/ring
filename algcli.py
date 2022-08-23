@@ -1,3 +1,4 @@
+from email.policy import default
 import os
 import click
 import subprocess
@@ -7,8 +8,17 @@ def cli():
     pass
 
 @cli.command()
-def run():
+@click.option("-d/-p", default= False)
+def run(d):
     os.environ["FLASK_APP"] = "app"
-    os.environ["FLASK_ENV"] = "development"
+    if d:
+        os.environ["FLASK_ENV"] = "development"
+    else:
+        os.environ["FLASK_ENV"] = "production"
     subprocess.run("./CLI/algrun.sh")
+    
+@cli.command()
+def backtest():
+    import backtraderTest
+    backtraderTest.run()
     
