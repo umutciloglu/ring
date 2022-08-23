@@ -4,3 +4,4 @@ Flask==2.0.2
 TA-Lib==0.4.21
 backtrader==1.9.76.123
 matplotlib==3.2.2
+click == 7.1.2
